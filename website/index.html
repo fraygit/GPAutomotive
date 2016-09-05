@@ -31,6 +31,34 @@
 		<!-- PAGE LEVEL SCRIPTS -->
 		<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/color_scheme/darkblue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+        <link href="assets/css/fullcalendar.min.css" rel="stylesheet" />
+
+        <style type="text/css">
+            .fc-left h2{
+                color: #186D99 !important;
+                font-size:16pt;
+            }
+
+            .text-justify {
+                 text-align: justify;
+            }
+
+            div.new_html_code {
+              width:150px;
+              height:200px;
+              min-width:150px;
+              min-height:100px;
+              max-width:200px;
+              max-height:200px;
+              overflow:hidden;
+              display:block;
+            }
+
+            .carousel-indicators{
+                top:0px;
+            }
+        </style>
 	</head>
 
 	<!--
@@ -110,7 +138,7 @@
 
 					<!-- left -->
 					<ul class="top-links list-inline">
-						<li class="hidden-xs"><a href="tel:096259199"><i class="fa fa-phone"></i> 09 625 9199</a></li>
+						<li class="hidden-xs"><a href="tel:096259199" style="font-size: 15pt!important;font-weight: bolder!important;"><i class="fa fa-phone"></i>09 625 9199</a></li>
                         <li class="hidden-xs"><a ui-sref="home.book"><i class="fa fa-map-marker"></i> Directions</a></li>
                         <li class="hidden-xs"><a ui-sref="home.book"><i class="fa fa-calendar"></i> Book</a></li>
 					</ul>
@@ -581,7 +609,7 @@
 					"navigation": true
 					"pagination": true
 			-->
-			<div class="text-center margin-top-30 margin-bottom-30">
+			<!--<div class="text-center margin-top-30 margin-bottom-30">
 				<div class="owl-carousel nomargin" data-plugin-options='{"items":2, "singleItem": false, "autoPlay": true}'>
 					<div>
                         <img class="img-responsive" src="images/mta-assured-rgb.jpg" alt="">
@@ -590,7 +618,7 @@
                         <img class="img-responsive" src="images/AA-repairer.jpg" alt="">
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 
 			<!-- FOOTER -->
@@ -635,8 +663,11 @@
 
 						<div class="col-md-4">
 
+                            <img class="img-responsive" src="images/mta-assured-rgb.jpg" alt="" style="width:60px">
+                            &nbsp;
+                            <img class="img-responsive" src="images/AA-repairer.jpg" alt="" style="width:60px">
 							<!-- Newsletter Form -->
-							<h4 class="letter-spacing-1">KEEP IN TOUCH</h4>
+							<!--<h4 class="letter-spacing-1">KEEP IN TOUCH</h4>
 							<p>Subscribe to Our Newsletter to get Important News &amp; Offers</p>
 
 							<form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
@@ -647,7 +678,7 @@
 										<button class="btn btn-success" type="submit">Subscribe</button>
 									</span>
 								</div>
-							</form>
+							</form>-->
 							<!-- /Newsletter Form -->
 
 							<!-- Social Icons -->
@@ -658,7 +689,7 @@
 									<i class="icon-facebook"></i>
 								</a>
 
-								<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+								<!--<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
 									<i class="icon-twitter"></i>
 									<i class="icon-twitter"></i>
 								</a>
@@ -671,12 +702,12 @@
 								<a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
 									<i class="icon-linkedin"></i>
 									<i class="icon-linkedin"></i>
-								</a>
+								</a>-->
 
-								<a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
+								<!--<a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
 									<i class="icon-rss"></i>
 									<i class="icon-rss"></i>
-								</a>
+								</a>-->
 					
 							</div>
 							<!-- /Social Icons -->
@@ -829,6 +860,10 @@
 		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.2.3.min.js"></script>
 
 		<script type="text/javascript" src="assets/js/scripts.js"></script>
+
+        <script src="assets/js/moment.min.js"></script>
+
+        <script src="assets/js/fullcalendar.min.js"></script>
 		
 		<!-- REVOLUTION SLIDER -->
 		<script type="text/javascript" src="assets/plugins/slider.revolution/js/jquery.themepunch.tools.min.js"></script>
@@ -841,6 +876,6 @@
         <script src="js/app/config.js"></script>
         <script src="js/app/app.js"></script>
 
-
+        <script src="js/app/controller/bookController.js"></script>
 	</body>
 </html>

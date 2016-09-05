@@ -10,8 +10,10 @@ namespace GPA.MongoData.Interface
 {
     public interface IBookingRepository : IEntityService<Booking>
     {
-        Task<bool> CheckBookingNoBookingConflict(Booking booking);
-        Task<Booking> Book(string parkingSpaceId, string username, DateTime from, DateTime to);
-        Task<Booking> Park(string bookingId, DateTime checkIn);
+        Task<bool> IsAvailable(DateTime bookingDate, int timeSlot, string serviceType);
+        Task<List<CalendarBooking>> GetCalendarBookings(DateTime startDate, DateTime endDate, string serviceType);
+        Task<List<int>> GetAvailableTimeSlot(DateTime date, string serviceType);
+        Task<List<Booking>> GetRequest(string serviceType);
+        Task<List<Booking>> GetApprovedBookings(DateTime bookingDate, string serviceType);
     }
 }

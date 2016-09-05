@@ -71,47 +71,47 @@ namespace GPA.API.Service
             client.SendMailAsync(mail);
         }
 
-        public async Task<bool> VendorRegistrationNotification(ParkingSpace parkingSpace)
-        {
-            var param = new string[] { parkingSpace.Email, parkingSpace.Address };
-            var emailToAdminBody = GetMessage(param, System.Web.Hosting.HostingEnvironment.MapPath("~/EmailTemplates/NewVendorRegistration.html"));
-            var emailToAdminReceiver = new List<string>();
-            emailToAdminReceiver.Add("francis.yanga@gmail.com");
-            emailToAdminReceiver.Add("mguadalupe@gmail.com");
-            emailToAdminReceiver.Add("welcome@parko.co.nz");
-            var emailToAdmin = new EmailNotification
-            {
-                From = "welcome@parko.co.nz",
-                To = emailToAdminReceiver,
-                Subject = "Parko - new vendor registration",
-                Message = emailToAdminBody,
-                IsHtml = true,
-                Status = 1
-            };
-            await EmailRepository.CreateSync(emailToAdmin);
-            return true;
-        }
-        public async Task<bool> VendorRegistrationSendToVendor(ParkingSpace parkingSpace)
-        {
-            var param = new string[] { parkingSpace.Email, parkingSpace.Address };
-            var emailToAdminBody = GetMessage(param, System.Web.Hosting.HostingEnvironment.MapPath("~/EmailTemplates/VendorRegistration.html"));
-            var emailToAdminReceiver = new List<string>();
-            emailToAdminReceiver.Add(parkingSpace.Email);
-            var bcc = new List<string>();
-            bcc.Add("welcome@parko.co.nz");
-            var emailToAdmin = new EmailNotification
-            {
-                From = "welcome@parko.co.nz",
-                To = emailToAdminReceiver,
-                Subject = "Welcome to Parko!",
-                Bcc = bcc,
-                Message = emailToAdminBody,
-                IsHtml = true,
-                Status = 1
-            };
-            await EmailRepository.CreateSync(emailToAdmin);
-            return true;
-        }
+        //public async Task<bool> VendorRegistrationNotification(ParkingSpace parkingSpace)
+        //{
+        //    var param = new string[] { parkingSpace.Email, parkingSpace.Address };
+        //    var emailToAdminBody = GetMessage(param, System.Web.Hosting.HostingEnvironment.MapPath("~/EmailTemplates/NewVendorRegistration.html"));
+        //    var emailToAdminReceiver = new List<string>();
+        //    emailToAdminReceiver.Add("francis.yanga@gmail.com");
+        //    emailToAdminReceiver.Add("mguadalupe@gmail.com");
+        //    emailToAdminReceiver.Add("welcome@parko.co.nz");
+        //    var emailToAdmin = new EmailNotification
+        //    {
+        //        From = "welcome@parko.co.nz",
+        //        To = emailToAdminReceiver,
+        //        Subject = "Parko - new vendor registration",
+        //        Message = emailToAdminBody,
+        //        IsHtml = true,
+        //        Status = 1
+        //    };
+        //    await EmailRepository.CreateSync(emailToAdmin);
+        //    return true;
+        //}
+        //public async Task<bool> VendorRegistrationSendToVendor(ParkingSpace parkingSpace)
+        //{
+        //    var param = new string[] { parkingSpace.Email, parkingSpace.Address };
+        //    var emailToAdminBody = GetMessage(param, System.Web.Hosting.HostingEnvironment.MapPath("~/EmailTemplates/VendorRegistration.html"));
+        //    var emailToAdminReceiver = new List<string>();
+        //    emailToAdminReceiver.Add(parkingSpace.Email);
+        //    var bcc = new List<string>();
+        //    bcc.Add("welcome@parko.co.nz");
+        //    var emailToAdmin = new EmailNotification
+        //    {
+        //        From = "welcome@parko.co.nz",
+        //        To = emailToAdminReceiver,
+        //        Subject = "Welcome to Parko!",
+        //        Bcc = bcc,
+        //        Message = emailToAdminBody,
+        //        IsHtml = true,
+        //        Status = 1
+        //    };
+        //    await EmailRepository.CreateSync(emailToAdmin);
+        //    return true;
+        //}
 
 
         private string GetMessage(string[] parameters, string templatePath)

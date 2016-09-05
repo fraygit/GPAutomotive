@@ -1,4 +1,92 @@
 ﻿<section>
-    <h2>Sorry, <strong>This page is still under construction.</strong></h2>
-    <a class="size-20 font-lato" ui-sref="home.index"><i class="glyphicon glyphicon-menu-left margin-right-10 size-16"></i> back to GP Automotive homepage now!</a>
+    <div class="container">
+
+        <div class="row">
+            <h3>Book Online</h3>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-7">
+                <div id='calendar' style="background-color:white"></div>
+                <i class="fa fa-circle" style="color:red;"></i> <span style="color:white!important;">Busy</span>
+                &nbsp;&nbsp;
+                <i class="fa fa-circle" style="color:green;"></i> <span style="color:white!important;">Available</span>
+                &nbsp;&nbsp;
+                <i class="fa fa-circle" style="color:white;"></i> <span style="color:white!important;">Not Possible</span>
+            </div>
+            <div class="col-md-5">
+
+                <div class="panel panel-default alternate">
+                    <div class="panel-heading panel-heading-transparent">
+                        <h2 class="panel-title bold">Select a schedule <span id="DateSelected"></span></h2>
+                    </div>
+
+                    
+                    <div class="panel-body">
+
+                        <div class="alert alert-mini alert-success margin-bottom-30" ng-show="ShowSuccess">
+                            <!-- SUCCESS -->
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            {{ SuccessMessage }}
+                        </div>
+
+                        <div class="alert alert-mini alert-danger margin-bottom-30" ng-show="ShowBookingError">
+                            <!-- DANGER -->
+                            {{ BookingErrorMessage }}
+                        </div>
+
+                        <div id="pnlSelectedDate" style="display:none;"><h3><span id="selectedDate"></span></h3></div>
+
+                        <div class="fancy-form fancy-form-select">
+                            <!-- select -->
+                            <select class="form-control" ng-model="Booking.ServiceType">
+                                <option value="wof">Warrant of Fitness</option>
+                                <option value="service">Service</option>
+                                <option value="prepurchaseinspection">Pre-purchase Inspection</option>
+                                <option value="repairs">Repairs</option>
+                                <option value="warrantandservice">Warrant and Service</option>
+                            </select>
+
+                            <i class="fancy-arrow"></i>
+                        </div>
+                        <p id="selectMessage">&nbsp;&nbsp;Please click on an available date.</p>
+                        <div id="pnlSchedule" style="display:none;">
+                            <div class="fancy-form fancy-form-select">
+                                <!-- select -->
+                                <select class="form-control" ng-model="Booking.TimeSlot">
+                                    <option value="{{ timeSlot.value }}" ng-repeat="timeSlot in TimeSlots">{{ timeSlot.text }}</option>
+                                </select>
+
+                                <i class="fancy-arrow"></i>
+                            </div>
+                            <div class="fancy-form">
+                                <!-- input -->
+                                <i class="fa fa-user"></i>
+
+                                <input type="text" class="form-control" placeholder="Your name" ng-model="Booking.CustomerName">
+
+                            </div>
+                            <div class="fancy-form">
+                                <!-- input -->
+                                <i class="fa fa-envelope"></i>
+
+                                <input type="text" class="form-control" placeholder="Email" ng-model="Booking.CustomerEmail">
+
+                            </div>
+                            <div class="fancy-form">
+                                <!-- input -->
+                                <i class="fa fa-mobile"></i>
+
+                                <input type="tel" class="form-control" placeholder="Mobile" ng-model="Booking.CustomerMobile">
+
+                            </div>
+                            <button class="btn  btn-primary" ng-click="BookNow()" ng-disabled="DisabledBookNow">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </section>

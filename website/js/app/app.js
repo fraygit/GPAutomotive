@@ -56,7 +56,8 @@ gpApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/book',
             views: {
                 'container@': {
-                    templateUrl: 'js/app/templates/book.html'
+                    templateUrl: 'js/app/templates/book.html',
+                    controller: 'BookController'
                 }
             }
         })

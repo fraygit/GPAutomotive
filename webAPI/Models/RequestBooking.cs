@@ -1,19 +1,15 @@
-﻿using GPA.MongoData.Entities.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace GPA.MongoData.Model
+namespace GPA.API.Models
 {
-    public class Booking : MongoEntity
+    public class RequestBooking
     {
         public string ServiceType { get; set; }
         public DateTime DateBooked { get; set; }
-        public bool IsApproved { get; set; }
         public int TimeSlot { get; set; }
-        public bool IsDeniedBooking { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerMobile { get; set; }
         public string CustomerName { get; set; }

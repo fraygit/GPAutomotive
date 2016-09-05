@@ -8,51 +8,115 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPA.MongoData.Common;
 
 namespace GPA.MongoData.Repository
 {
     public class BookingRepository : EntityService<Booking>, IBookingRepository
     {
-        public async Task<bool> CheckBookingNoBookingConflict(Booking booking)
+
+        public async Task<bool> IsAvailable(DateTime bookingDate, int timeSlot, string serviceType)
         {
             var builder = Builders<Booking>.Filter;
-            var filter = builder.Eq("ParkingSpaceId", booking.ParkingSpaceId);
+            var filter = builder.Eq("DateBooked", bookingDate.Date) & builder.Eq("TimeSlot", timeSlot) & builder.Eq("ServiceType", serviceType);
             var bookings = await ConnectionHandler.MongoCollection.Find(filter).ToListAsync();
-
-            foreach (var item in bookings)
-            {
-                if ((booking.FromDate >= item.FromDate && booking.FromDate <= item.ToDate) 
-                    || (booking.FromDate >= item.ToDate && booking.ToDate <= item.ToDate)
-                    || (booking.FromDate <= item.FromDate && booking.ToDate >= item.ToDate))
-                {
-                    return false;
-                }
-            }
+            if (bookings.Count > 1)
+                return false;
             return true;
         }
 
-        public async Task<Booking> Book(string parkingSpaceId, string username, DateTime from, DateTime to)
+        public async Task<List<Booking>> GetRequest(string serviceType)
         {
-            var booking = new Booking
+            var builder = Builders<Booking>.Filter;
+            var filter = builder.Eq("IsApproved", false) & builder.Eq("IsDeniedBooking", false) & builder.Eq("ServiceType", serviceType);
+            var bookings = await ConnectionHandler.MongoCollection.Find(filter).ToListAsync();
+
+            if (bookings.Any())
             {
-                ParkingSpaceId = parkingSpaceId,
-                Username = username,
-                FromDate = from,
-                ToDate = to
-            };
-            await ConnectionHandler.MongoCollection.InsertOneAsync(booking);
-            return booking;
+                return bookings.Where(n => n.DateBooked > DateTime.Now.Date).ToList();
+            }
+            return null;
         }
 
-        public async Task<Booking> Park(string bookingId, DateTime checkIn)
+        public async Task<List<int>> GetAvailableTimeSlot(DateTime date, string serviceType)
         {
-            var id = ObjectId.Parse(bookingId);
             var builder = Builders<Booking>.Filter;
-            var filter = builder.Eq("_id", id);
-            var booking = await this.Get(bookingId);
-            booking.DateTimeCheckedIn = checkIn;
-            var result = await ConnectionHandler.MongoCollection.ReplaceOneAsync(filter, booking);
-            return booking;
+            var filter = builder.Eq("DateBooked", date.Date);
+            var bookings = await ConnectionHandler.MongoCollection.Find(filter).ToListAsync();
+            
+            var timeSlots = new List<int>();
+
+            if (bookings.Any())
+            {
+                for (var i = 8; i < 17; i++)
+                {
+                    if (!bookings.Any(n => n.TimeSlot == i && n.IsApproved == true))
+                    {
+                        timeSlots.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                for (var i = 8; i < 17; i++)
+                {
+                    timeSlots.Add(i);
+                }
+            }
+            return timeSlots;
+        }
+
+        public async Task<List<Booking>> GetApprovedBookings(DateTime bookingDate, string serviceType)
+        {
+            var builder = Builders<Booking>.Filter;
+            var filter = builder.Eq("IsApproved", true) &
+                builder.Eq("ServiceType", serviceType) &
+                builder.Eq("DateBooked", bookingDate.Date);
+
+            var bookings = await ConnectionHandler.MongoCollection.Find(filter).ToListAsync();
+            return bookings;
+        }
+
+        public async Task<List<CalendarBooking>> GetCalendarBookings(DateTime startDate, DateTime endDate, string serviceType)
+        {
+            var builder = Builders<Booking>.Filter;
+            var filter = builder.Eq("IsApproved", true) & 
+                builder.Eq("IsDeniedBooking", false) &
+                builder.Eq("ServiceType", serviceType);
+
+            var bookings = await ConnectionHandler.MongoCollection.Find(filter).ToListAsync();
+            bookings = bookings.Where(n => n.DateBooked >= startDate.ToUniversalTime() && n.DateBooked <= endDate.ToUniversalTime()).ToList();
+
+            var calendarBookings = new List<CalendarBooking>();
+            foreach (DateTime day in Helper.EachDay(startDate, endDate))
+            {
+                if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    continue;
+                }
+                if (bookings.Count(n => n.DateBooked.Date == day.Date) > 7)
+                {
+                    calendarBookings.Add(new CalendarBooking
+                    {
+                        allday = true,
+                        start = day.ToString("yyyy-MM-dd"),
+                        title = "Not available",
+                        color = "red"
+                    });
+                }
+                else
+                {
+                    calendarBookings.Add(new CalendarBooking
+                    {
+                        allday = true,
+                        start = day.ToString("yyyy-MM-dd"),
+                        title = "Available",
+                        color = "green"
+                    });
+                }
+            }
+            return calendarBookings;
+            return null;
         }
 
     }

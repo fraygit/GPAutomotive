@@ -31,7 +31,8 @@ gpaAdminApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/home',
             views: {
                 'container@': {
-                    templateUrl: 'js/app/templates/home.html'
+                    templateUrl: 'js/app/templates/home.html',
+                    controller: 'HomeController'
                 }
             }
         })
