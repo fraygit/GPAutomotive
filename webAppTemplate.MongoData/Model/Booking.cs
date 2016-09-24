@@ -17,5 +17,6 @@ namespace GPA.MongoData.Model
         public string CustomerEmail { get; set; }
         public string CustomerMobile { get; set; }
         public string CustomerName { get; set; }
+        public string Comment { get; set; }
     }
 }

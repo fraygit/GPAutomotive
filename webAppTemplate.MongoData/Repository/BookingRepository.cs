@@ -46,23 +46,29 @@ namespace GPA.MongoData.Repository
             
             var timeSlots = new List<int>();
 
-            if (bookings.Any())
+            //NO BLOCKING
+            for (var i = 8; i < 17; i++)
             {
-                for (var i = 8; i < 17; i++)
-                {
-                    if (!bookings.Any(n => n.TimeSlot == i && n.IsApproved == true))
-                    {
-                        timeSlots.Add(i);
-                    }
-                }
+                timeSlots.Add(i);
             }
-            else
-            {
-                for (var i = 8; i < 17; i++)
-                {
-                    timeSlots.Add(i);
-                }
-            }
+
+            //if (bookings.Any())
+            //{
+            //    for (var i = 8; i < 17; i++)
+            //    {
+            //        if (!bookings.Any(n => n.TimeSlot == i && n.IsApproved == true))
+            //        {
+            //            timeSlots.Add(i);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    for (var i = 8; i < 17; i++)
+            //    {
+            //        timeSlots.Add(i);
+            //    }
+            //}
             return timeSlots;
         }
 
@@ -90,7 +96,7 @@ namespace GPA.MongoData.Repository
             var calendarBookings = new List<CalendarBooking>();
             foreach (DateTime day in Helper.EachDay(startDate, endDate))
             {
-                if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
+                if (day.DayOfWeek == DayOfWeek.Sunday)
                 {
                     continue;
                 }

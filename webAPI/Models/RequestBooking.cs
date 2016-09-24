@@ -13,5 +13,6 @@ namespace GPA.API.Models
         public string CustomerEmail { get; set; }
         public string CustomerMobile { get; set; }
         public string CustomerName { get; set; }
+        public string Comment { get; set; }
     }
 }

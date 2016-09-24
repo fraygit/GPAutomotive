@@ -38,6 +38,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
+                                <th>Comment</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
@@ -49,6 +50,7 @@
                                 <td>{{ request.CustomerName }}</td>
                                 <td>{{ request.CustomerEmail }}</td>
                                 <td>{{ request.CustomerMobile }}</td>
+                                <td>{{ request.Comment }}</td>
                                 <td>
                                     <button class="btn" ng-click="ApproveBooking(request.Id, true)">
                                         <i class="fa fa-check"></i> Accept

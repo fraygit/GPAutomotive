@@ -70,7 +70,8 @@ namespace GPA.API.Controllers
                         TimeSlot = requestBooking.TimeSlot,
                         CustomerEmail = requestBooking.CustomerEmail,
                         CustomerMobile = requestBooking.CustomerMobile,
-                        CustomerName = requestBooking.CustomerName
+                        CustomerName = requestBooking.CustomerName,
+                        Comment = requestBooking.Comment
                     };
                     await bookingRepository.CreateSync(booking);
                     return booking;
