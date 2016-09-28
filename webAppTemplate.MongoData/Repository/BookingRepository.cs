@@ -46,8 +46,10 @@ namespace GPA.MongoData.Repository
             
             var timeSlots = new List<int>();
 
+            var upToTime = date.DayOfWeek == DayOfWeek.Saturday ? 12 : 17;
+
             //NO BLOCKING
-            for (var i = 8; i < 17; i++)
+            for (var i = 8; i < upToTime; i++)
             {
                 timeSlots.Add(i);
             }

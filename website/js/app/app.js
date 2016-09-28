@@ -62,6 +62,14 @@ gpApp.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
 
+        .state('home.findus', {
+            url: '/findus',
+            views: {
+                'container@': {
+                    templateUrl: 'js/app/templates/findus.html'
+                }
+            }
+        })
 });
 
 

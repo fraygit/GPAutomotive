@@ -11,7 +11,34 @@
         $http.get(appGlobalSettings.apiBaseUrl + '/BookingRequest?serviceType=' + $scope.FormBookingRequest.ServiceType,
         JSON.stringify($scope.Booking))
         .then(function (data) {
-            $scope.BookingRequests = data.data;
+            //$scope.BookingRequests = data.data;
+            var bookingRequests = [];
+            $.each(data.data, function (index, item) {
+                var hour = "00";
+                if (new Date(item.DateBooked).getDay() == 6) {
+                    hour = "30";
+                }
+
+                if (item.TimeSlot == 11 && new Date(item.DateBooked).getDay() == 6) {
+                    var timeSlot = { value: item, text: item + ':00 AM' };
+                    item.TimeSlot2 = item.TimeSlot + ':00 AM';
+                }
+                else if (item.TimeSlot < 12 && item.TimeSlot != 11) {
+                    var timeSlot = { value: item, text: item + ':' + hour + ' AM' };
+                    item.TimeSlot2 = item.TimeSlot + ':' + hour + ' AM';
+                }
+                else if (item.TimeSlot == 12) {
+                    var timeSlot = { value: item, text: item + ':' + hour + ' PM' };
+                    item.TimeSlot2 = item.TimeSlot + ':' + hour + ' PM';;
+                }
+                else {
+                    var time = item.TimeSlot - 12;
+                    var timeSlot = { value: time, text: time + ':' + hour + ' PM' };
+                    item.TimeSlot2 = item.TimeSlot + ':' + hour + ' PM';;
+                }
+                bookingRequests.push(item);
+            });
+            $scope.BookingRequests = bookingRequests;
             sessionStorage.setItem("BookingRequest-" + $scope.FormBookingRequest.ServiceType, JSON.stringify(data.data));
         }, function (error) {
         });
@@ -61,17 +88,26 @@
         .then(function (data) {
             $scope.TimeSlots = [];
             $.each(data.data, function (index, item) {
-                if (item < 12) {
+                var hour = "00";
+                if (new Date($scope.EditBookingRequestItem.DateBooked).getDay() == 6) {
+                    hour = "30";
+                }
+
+                if (item == 11 && new Date($scope.EditBookingRequestItem.DateBooked).getDay() == 6) {
                     var timeSlot = { value: item, text: item + ':00 AM' };
                     $scope.TimeSlots.push(timeSlot);
                 }
+                else if (item < 12 && item != 11) {
+                    var timeSlot = { value: item, text: item + ':' + hour + ' AM' };
+                    $scope.TimeSlots.push(timeSlot);
+                }
                 else if (item == 12) {
-                    var timeSlot = { value: item, text: item + ':00 PM' };
+                    var timeSlot = { value: item, text: item + ':' + hour + ' PM' };
                     $scope.TimeSlots.push(timeSlot);
                 }
                 else {
                     var time = item - 12;
-                    var timeSlot = { value: time, text: time + ':00 PM' };
+                    var timeSlot = { value: time, text: time + ':' + hour + ' PM' };
                     $scope.TimeSlots.push(timeSlot);
                 }
             });

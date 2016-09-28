@@ -1,1 +1,54 @@
-﻿
+﻿<style type="text/css">
+    #map-canvas {
+        width:600px;
+        height:400px;
+    }
+</style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initMap"></script>
+
+<section>
+    <div class="container">
+        <header class="text-left margin-bottom-40">
+            <h1 class="weight-800">FIND US</h1>
+            <!--<h2 class="weight-300 letter-spacing-1 size-13"><span>THE MOST COMPLETE TEMPLATE EVER</span></h2>-->
+        </header>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+                <address style="color:white!important;">
+                    <ul class="list-unstyled">
+                        <li class="footer-sprite address">
+                            681 Mt Albert Road<br>
+                            Auckland, New Zealand<br>
+                        </li>
+                        <li class="footer-sprite phone">
+                            Phone: 09 625 9199
+                        </li>
+                        <li class="footer-sprite email">
+                            <a href="mailto:gpautomotive@vodafone.co.nz" style="color:white!important;">gpautomotive@vodafone.co.nz</a>
+                        </li>
+                    </ul>
+                </address>
+
+                <div class="col-sm-8 col-sm-offset-2">
+                    <!--<img src="images/staticmap.png" class="img-responsive"/>-->
+                    <div id="map-canvas"></div>
+                </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById("map-canvas"), {
+            center: { lat: -36.9113701, lng: 174.7720743 },
+            zoom: 14
+        });
+
+        var marker = new google.maps.Marker({ position: new google.maps.LatLng(-36.9113701, 174.7720743), Title: 'Gary PROHM automotive ltd.' });
+        marker.setMap(map);
+    };
+    
+</script>

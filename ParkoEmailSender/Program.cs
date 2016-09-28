@@ -10,7 +10,7 @@ using System.Net;
 using System.Threading;
 using System.Configuration;
 
-namespace ParkoEmailSender
+namespace GPAEmailSender
 {
     public class Program
     {
@@ -52,7 +52,7 @@ namespace ParkoEmailSender
                 message.Subject = request.Subject;
 
                 message.Body = request.Message;
-                var from = string.IsNullOrEmpty(request.From) ? "welcome@parko.co.nz" : request.From;
+                var from = string.IsNullOrEmpty(request.From) ? "gpautomotive@vodafone.co.nz" : request.From;
                 message.From = new MailAddress(from);
 
                 foreach (var to in request.To)

@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{62858E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkoEmailSender", "ParkoEmailSender\ParkoEmailSender.csproj", "{132B1A1F-C298-420A-936A-65C30859755A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPAEmailSender", "ParkoEmailSender\GPAEmailSender.csproj", "{132B1A1F-C298-420A-936A-65C30859755A}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "website(1)", "http://localhost:56451", "{6868BA4A-ED03-4D51-8D36-757FFD93078E}"
 	ProjectSection(WebsiteProperties) = preProject

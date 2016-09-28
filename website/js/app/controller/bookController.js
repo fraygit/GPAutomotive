@@ -48,17 +48,27 @@
                 .then(function (data) {
                     $scope.TimeSlots = [];
                     $.each(data.data, function (index, item) {
-                        if (item < 12) {
+                        var hour = "00";
+                        if ($scope.Booking.DateBooked.getDay() == 6) {
+                            hour = "30";
+                        }
+
+                        if (item == 11 && $scope.Booking.DateBooked.getDay() == 6) {
                             var timeSlot = { value: item, text: item + ':00 AM' };
+                            $scope.TimeSlots.push(timeSlot);
+                            return true;
+                        }
+                        else if (item < 12) {
+                            var timeSlot = { value: item, text: item + ':' + hour + ' AM' };
                             $scope.TimeSlots.push(timeSlot);
                         }
                         else if (item == 12){
-                            var timeSlot = { value: item, text: item + ':00 PM' };
+                            var timeSlot = { value: item, text: item + ':' + hour + ' PM' };
                             $scope.TimeSlots.push(timeSlot);
                         }
                         else {
                             var time = item - 12;
-                            var timeSlot = { value: time, text: time + ':00 PM' };
+                            var timeSlot = { value: time, text: time + ':' + hour + ' PM' };
                             $scope.TimeSlots.push(timeSlot);
                         }
                     });

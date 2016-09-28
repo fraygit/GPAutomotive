@@ -55,6 +55,7 @@
                             <div class="fancy-form fancy-form-select">
                                 <!-- select -->
                                 <select class="form-control" ng-model="Booking.TimeSlot">
+                                    <option value="" disabled>Time</option>
                                     <option value="{{ timeSlot.value }}" ng-repeat="timeSlot in TimeSlots">{{ timeSlot.text }}</option>
                                 </select>
 

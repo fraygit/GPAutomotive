@@ -7,8 +7,8 @@
     <ProjectGuid>{132B1A1F-C298-420A-936A-65C30859755A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ParkoEmailSender</RootNamespace>
-    <AssemblyName>ParkoEmailSender</AssemblyName>
+    <RootNamespace>GPAEmailSender</RootNamespace>
+    <AssemblyName>GPAEmailSender</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
