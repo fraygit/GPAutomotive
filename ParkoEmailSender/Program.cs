@@ -54,6 +54,7 @@ namespace GPAEmailSender
                 message.Body = request.Message;
                 var from = string.IsNullOrEmpty(request.From) ? "gpautomotive@vodafone.co.nz" : request.From;
                 message.From = new MailAddress(from);
+                message.ReplyTo = new MailAddress("gpautomotive@vodafone.co.nz");
 
                 foreach (var to in request.To)
                 {
