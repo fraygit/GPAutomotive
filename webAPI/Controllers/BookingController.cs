@@ -17,19 +17,42 @@ namespace GPA.API.Controllers
     {
         private readonly IBookingRepository bookingRepository;
         private readonly IEmailNotificationRepository emailNotificationRepository;
+        private readonly IBlockedDateRepository blockedDateRepository;
 
-        public BookingController(IBookingRepository bookingRepository, IEmailNotificationRepository emailNotificationRepository)
+        public BookingController(IBookingRepository bookingRepository, IEmailNotificationRepository emailNotificationRepository, IBlockedDateRepository blockedDateRepository)
         {
             this.bookingRepository = bookingRepository;
             this.emailNotificationRepository = emailNotificationRepository;
+            this.blockedDateRepository = blockedDateRepository;
         }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpGet]
         public async Task<List<CalendarBooking>> GetBookingForCalendar(string serviceType)
         {
+            var blockedDates = await blockedDateRepository.ListAll();
             var calendarData = await bookingRepository.GetCalendarBookings(DateTime.Today.AddDays(1), DateTime.Now.AddMonths(3), serviceType);
-            return calendarData;
+            var calendar = new List<CalendarBooking>();
+            TimeZoneInfo nzSTZone = TimeZoneInfo.FindSystemTimeZoneById("New Zealand Standard Time");
+            foreach (var calendarDay in calendarData)
+            {
+                var isBlocked = false;
+                foreach (var blockedDate in blockedDates)
+                {
+                    var convertedDatetime = TimeZoneInfo.ConvertTimeFromUtc(blockedDate.Blocked, nzSTZone);
+                    var a = convertedDatetime.ToString("yyyy-MM-dd");
+                    var b = calendarDay.start;
+                    if (calendarDay.start == convertedDatetime.ToString("yyyy-MM-dd"))
+                    {
+                        isBlocked = true;
+                    }
+                }
+                if (!isBlocked)
+                {
+                    calendar.Add(calendarDay);
+                }
+            }
+            return calendar;
         }
 
         [EnableCors(origins: "*", headers: "*", methods: "*")]

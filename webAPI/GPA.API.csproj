@@ -145,6 +145,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApprovedBookingController.cs" />
+    <Compile Include="Controllers\BlockedDateController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\BookingRequestController.cs" />
     <Compile Include="Controllers\TimeSlotController.cs" />

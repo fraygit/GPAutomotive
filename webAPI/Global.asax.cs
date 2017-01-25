@@ -20,6 +20,7 @@ namespace GPA.API
             container.Register<IBookingRepository, BookingRepository>(Lifestyle.Scoped);
             container.Register<IAdminUserRepository, AdminUserRepository>(Lifestyle.Scoped);
             container.Register<IAdminUserTokenRepository, AdminUserTokenRepository>(Lifestyle.Scoped);
+            container.Register<IBlockedDateRepository, BlockedDateRepository>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

@@ -12,6 +12,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><b>Booking Request</b></a></li>
                 <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><b>Current Bookings</b></a></li>
+                <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false"><b>Block Date</b></a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -110,6 +111,43 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="tab-pane" id="tab_3">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Select a date to block</label>
+                                <input type="text" class="form-control" id="txtBlockDate"/>
+                            </div>
+                            <button class="btn btn-primary disabled">Add</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Blocked Dates</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    <tr ng-repeat="blockedDate in BlockedDates">
+                                        <td>{{ blockedDate.Blocked | date:'dd MMM yyyy'}}</td>
+                                        <td>
+                                            <button class="btn" ng-click="DeleteBlocked(blockedDate.Id)">
+                                                <i class="fa fa-trash-o"></i> Remove
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.tab-content -->

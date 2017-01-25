@@ -7,6 +7,12 @@
 
     $scope.EditBookingRequestItem = {};
 
+    $scope.BlockedDates = [];
+
+    $("#txtBlockDate").datepicker({
+        format: 'mm/dd/yyyy'
+    });
+
     $scope.BindList = function () {
         $http.get(appGlobalSettings.apiBaseUrl + '/BookingRequest?serviceType=' + $scope.FormBookingRequest.ServiceType,
         JSON.stringify($scope.Booking))
@@ -152,5 +158,42 @@
             $("#pnlEditBookingRequest").modal('hide');
         });
     }
+
+    $scope.AddBlockDate = function () {
+        if (!isBlank($("#txtBlockDate").val())) {
+            var request = JSON.stringify({
+                "BlockedDate": new Date($("#txtBlockDate").val())
+            });
+            $http.put(appGlobalSettings.apiBaseUrl + '/BlockedDate',
+                request)
+            .then(function (data) {
+                LoadBlockedDates();
+                $("#txtBlockDate").val('');
+            }, function (e) {
+            });
+        }
+    }
+
+    $scope.DeleteBlocked = function (deleteBlockedDateId) {
+        $http.delete(appGlobalSettings.apiBaseUrl + '/BlockedDate/' + deleteBlockedDateId)
+        .then(function (data) {
+            LoadBlockedDates();
+        }, function (e) {
+        });
+    };
+
+    function isBlank(str) {
+        return (!str || /^\s*$/.test(str));
+    }
+
+    var LoadBlockedDates = function(){
+        $http.get(appGlobalSettings.apiBaseUrl + '/BlockedDate')
+        .then(function (data) {
+            $scope.BlockedDates = data.data;
+        }, function (error) {
+        });
+    };
+    LoadBlockedDates();
+
 
 }]);

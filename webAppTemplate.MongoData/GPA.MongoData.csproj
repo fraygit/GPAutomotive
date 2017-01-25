@@ -58,6 +58,7 @@
     <Compile Include="Entities\Base\MongoEntity.cs" />
     <Compile Include="Interface\IAdminUserRepository.cs" />
     <Compile Include="Interface\IAdminUserTokenRepository.cs" />
+    <Compile Include="Interface\IBlockedDateRepository.cs" />
     <Compile Include="Interface\IBookingRepository.cs" />
     <Compile Include="Interface\IEmailErrorRepository.cs" />
     <Compile Include="Interface\IEmailNotificationRepository.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Interface\IUserTokenRepository.cs" />
     <Compile Include="Model\AdminUser.cs" />
     <Compile Include="Model\AdminUserToken.cs" />
+    <Compile Include="Model\BlockedDate.cs" />
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\CalendarBooking.cs" />
     <Compile Include="Model\EmailError.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminUserRepository.cs" />
     <Compile Include="Repository\AdminUserTokenRepository.cs" />
+    <Compile Include="Repository\BlockedDateRepository.cs" />
     <Compile Include="Repository\BookingRepository.cs" />
     <Compile Include="Repository\EmailErrorRepository.cs" />
     <Compile Include="Repository\EmailNotificationRepository.cs" />
