@@ -96,8 +96,12 @@ namespace GPA.MongoData.Repository
             bookings = bookings.Where(n => n.DateBooked >= startDate.ToUniversalTime() && n.DateBooked <= endDate.ToUniversalTime()).ToList();
 
             var calendarBookings = new List<CalendarBooking>();
-            foreach (DateTime day in Helper.EachDay(startDate, endDate))
+            foreach (DateTime day in Helper.EachDay(startDate, endDate)) 
             {
+                if (day.Date > new DateTime(2016, 12, 22) && day.Date < new DateTime(2017, 1, 4))
+                {
+                    continue;
+                }
                 if (day.DayOfWeek == DayOfWeek.Sunday)
                 {
                     continue;
